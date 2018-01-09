@@ -1,0 +1,11 @@
+select {
+    min-width: 100%;
+}
+.select{
+    min-width: 100%;
+}
+.columns > .columns{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+}

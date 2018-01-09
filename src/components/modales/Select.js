@@ -3,37 +3,44 @@ import React, { Component } from 'react';
 class Select extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: [] };
+    this.state = { options: [], value: '' };
   }
-  componentWillMount(){
-    if (this.props.id !== undefined){
-  fetch(`http://192.168.0.244/${this.props.id}`)
-  .then(response => response.json())
-  .then(response => {
-    this.setState({
-      value: response
-    });
-  })
-  .catch(function(error) {
-    console.log('Request failed', error)
-  });
-} else {
-  this.setState({
-    value: this.props.value
-});
-}
-}
+  componentWillMount() {
+    if (this.props.id !== undefined) {
+      fetch(`http://192.168.0.244/${this.props.id}`)
+        .then(response => response.json())
+        .then(response => {
+          this.setState({
+            options: response,
+            value: response[0].id
+          }, () => console.log(this.state.value));
+        })
+        .catch(function (error) {
+          console.log('Request failed', error)
+        });
+    } else {
+      this.setState({
+        options: this.props.value
+      });
+    }
+  }
   handleChange(event) {
-        this.setState({value: event.target.value.toUpperCase()})
+    this.setState({ value: event.target.value}); 
+    this.props.handleChange( event.target.value, this.props.label);
   }
   render() {
-    let values = this.state.value;
+    let values = this.state.options;
     let options = values.map(option => {
-      return <option key={option.id}>{option.tipo}</option>;
+      if (option.nombre) {
+        return <option key={option.id} value={option.id} >{option.nombre.toUpperCase()}</option>;
+      } else {
+        return <option key={option.id}>{option.nombre}</option>;
+      }
     });
+
     if (this.props.estado) {
       return (
-        <div className={`column ${this.props.is}`}>
+        <div className={`column`}>
           <div className="field">
             <label className="label">{this.props.label}</label>
             <div className="control">
@@ -44,11 +51,11 @@ class Select extends Component {
       );
     } else {
       return (
-        <div className={`column ${this.props.is}`}>
+        <div className={`column`}>
           <div className="field">
             <label className="label">{this.props.label}</label>
             <div className="select is-info">
-              <select>
+              <select onChange={this.handleChange.bind(this)}>
                 {options}
               </select>
             </div>

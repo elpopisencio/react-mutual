@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import Formulario from './Formulario';
 import Footer from '../Footer';
+import './AltaTitular.css';
 
 class AltaTitular extends React.Component {
   constructor() {
@@ -9,40 +10,51 @@ class AltaTitular extends React.Component {
     this.state = {
       showModal: false,
       boton: '',
-      modal: <div />
+      modal: <div />,
+      formulario: false,
     };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-handleOpenModal(){
-  this.displayModal('');
-}
+  handleOpenModal() {
+    this.displayModal('');
+  }
 
   displayModal(boton) {
-    this.setState({ 
-        modal:<ReactModal
+    let a = '';
+    if (this.state.formulario) {
+      a = <a className={`button is-link ${boton}`} onClick={this.handleAlta.bind(this)}>
+        Dar Alta
+      </a>;
+    } else {
+         a = <a className={`button is-link ${boton}`} disabled onClick={this.handleAlta.bind(this)}>
+               Dar Alta
+             </a>;
+    }
+
+    this.setState({
+      modal:
+        <ReactModal
           isOpen={true}
           contentLabel="Minimal Modal Example"
           ariaHideApp={false}
         >
-          <Formulario />
+          <Formulario checkFields={this.checkFields.bind(this)} />
           <Footer>
             <div className='level'>
               <div className='level-left'>
-      </div>
+              </div>
               <div className='level-right'>
                 <div className="field is-grouped">
                   <p className="control">
-                    <a className={`button is-link ${boton}`} onClick={this.handleAlta.bind(this)}>
-                      Dar Alta
-    </a>
+                    {a}
                   </p>
                   <p className="control">
                     <a className="button" onClick={this.handleCloseModal}>
                       Cancelar
-    </a>
+                  </a>
                   </p>
                 </div>
               </div>
@@ -52,14 +64,20 @@ handleOpenModal(){
     });
   }
 
+  checkFields(bool){
+    this.setState({formulario: bool}, this.displayModal(this.state.boton));
+  }
+
   handleCloseModal() {
-    this.setState({ 
+    this.setState({
       modal: <div />
     });
   }
 
   handleAlta() {
-    this.displayModal('is-loading');
+    if (this.state.formulario) {
+      this.setState({boton: 'is-loading'}, this.displayModal('is-loading'));
+    }
   }
 
   render() {
@@ -68,7 +86,7 @@ handleOpenModal(){
         <a className="button" onClick={this.handleOpenModal}>
           <span>
             Alta Titular
-                    </span>
+          </span>
         </a>
         {this.state.modal}
       </div>

@@ -7,15 +7,11 @@ class Campo extends Component {
 
   }
   handleChange(event) {
-        this.setState({value: event.target.value.toUpperCase()});
-        if(event.target.value === ''){
-          this.setState({bandera: false}, this.props.handleChange(-1));
-        } else {
-          if(!this.state.bandera){
-            console.log('e');
-          this.setState({bandera: true}, this.props.handleChange(1));
-          }
-        }
+    if(this.props.label === 'Email'){
+        this.setState({value: event.target.value}, this.props.handleChange( event.target.value, this.props.label));
+    }else{
+        this.setState({value: event.target.value.toUpperCase()}, this.props.handleChange( this.state.value, this.props.label));
+    }
   }
   render() {
     if (this.props.estado) {
@@ -35,7 +31,7 @@ class Campo extends Component {
           <div className="field">
             <label className="label">{this.props.label}</label>
             <div className="control">
-              <input className="input is-info" id={this.props.id} type={this.props.type} value={this.state.value} placeholder={this.props.placeholder} onChange={this.handleChange.bind(this)}></input>
+              <input className="input is-info" id={this.props.id} size={this.props.size} maxlenght={this.props.maxlenght} type={this.props.type} value={this.state.value} placeholder={this.props.placeholder} onChange={this.handleChange.bind(this)}></input>
             </div>
           </div>
         </div>
