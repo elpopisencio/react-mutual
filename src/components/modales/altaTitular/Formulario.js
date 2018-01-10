@@ -10,8 +10,8 @@ class Buscar extends Component {
       apellido: ['', <Campo type="text" label={'Apellido'} placeholder="" is='is-one-fifth' handleChange={this.handleChange.bind(this)} />],
       nombre: ['', <Campo type="text" label={'Nombre'} placeholder="" is='is-one-fifth' handleChange={this.handleChange.bind(this)} />],
       cuil: ['', <Campo type="text" label={'CUIL'} placeholder="" is='is-one-fifth' handleChange={this.handleChange.bind(this)} />],
-      numeroDocumento: ['', <Campo type="text" label={'Nº de Documento'} placeholder="" is='is-one-fifth' handleChange={this.handleChange.bind(this)} />],
-      fechaEstado: ['', <Campo type="date" label={'Fecha de cambio de estado'} placeholder="" handleChange={this.handleChange.bind(this)} />],
+      numeroDocumento: ['', <Campo type="text" label={'Nº de Documento'} placeholder="" is='is-two-thirds' handleChange={this.handleChange.bind(this)} />],
+      fechaEstado: ['', <Campo type="date" label={'Fecha de Afiliacion'} placeholder="" handleChange={this.handleChange.bind(this)} />],
       fechaTarjeta: ['', <Campo type="date" label={'Fecha de Entrega de Tarjeta'} placeholder="" handleChange={this.handleChange.bind(this)} />],
       fechaNacimiento: ['', <Campo type="date" label={'Fecha de Nacimiento'} placeholder="" handleChange={this.handleChange.bind(this)} />],
       subcontrato: ['', <Campo type="text" label={'Subcontrato'} placeholder="" handleChange={this.handleChange.bind(this)} />],
@@ -21,7 +21,7 @@ class Buscar extends Component {
       telefono: ['', <Campo type="text" label={'Telefono'} placeholder="" handleChange={this.handleChange.bind(this)} />],
       numeroCarga: ['', <Campo type="text" label={'Numero de Carga'} placeholder="" handleChange={this.handleChange.bind(this)} />],
       sexo: ['', <Select label={'Sexo'} value={[{ 'id': 'M', 'nombre': 'Masculino' }, { 'id': 'F', 'nombre': 'Femenino' }]} handleChange={this.handleChange.bind(this)} />],
-      tipoDocumento: ['', <Select label={'Tipo de Doc.'} id={'tiposDocumento'} handleChange={this.handleChange.bind(this)} />],
+      tipoDocumento: ['', <Select label={'Tipo Doc.'} id={'tiposDocumento'} handleChange={this.handleChange.bind(this)} />],
       grupoSanguineo: ['', <Select label={'Grupo Sanguineo'} id={'gruposSanguineos'} handleChange={this.handleChange.bind(this)} />],
       idReparticion: ['', <Select label={'Reparticion'} id={'reparticiones'} handleChange={this.handleChange.bind(this)} />],
       idDelegacion: ['', <Select label={'Delegacion'} id={'delegaciones'} handleChange={this.handleChange.bind(this)} />],
@@ -32,23 +32,34 @@ class Buscar extends Component {
     }
     this.checkFields = this.checkFields.bind(this);
   }
-  checkFields() {
+  checkFields = () => {
+    console.log(
+
+      this.state.apellido[0],
+      this.state.nombre[0],
+      this.state.cuil[0],
+      this.state.numeroDocumento[0],
+      this.state.fechaEstado[0],
+      this.state.fechaNacimiento[0],
+      this.state.subcontrato[0],
+      this.state.legajo[0],
+      this.state.domicilio[0],
+      this.state.email[0],
+      this.state.telefono
+    );
     if (
       this.state.apellido[0] !== '' &&
       this.state.nombre[0] !== '' &&
-      this.state.cuil[0] !== '' //&&
-      /*
+      this.state.cuil[0] !== '' &&
       this.state.numeroDocumento[0] !== '' &&
       this.state.fechaEstado[0] !== '' &&
-      this.state.fechaTarjeta[0] !== '' &&
       this.state.fechaNacimiento[0] !== '' &&
       this.state.subcontrato[0] !== '' &&
       this.state.legajo[0] !== '' &&
       this.state.domicilio[0] !== '' &&
       this.state.email[0] !== '' &&
-      this.state.telefono[0] !== '' &&
-      this.state.numeroCarga[0] !== ''
-    */
+      this.state.telefono[0] !== ''
+    
     ){
         console.log('entro');
         this.props.checkFields(true);
@@ -61,13 +72,37 @@ class Buscar extends Component {
     console.log(value, label);
     switch (label) {
       case 'Apellido':
-        this.setState({ apellido: [value, this.state.apellido[1]] }, this.checkFields());
+        this.setState({ apellido: [value, this.state.apellido[1]] }, () => this.checkFields());
         break;
       case 'Nombre':
-        this.setState({ nombre: [value, this.state.nombre[1]] }, this.checkFields());
+        this.setState({ nombre: [value, this.state.nombre[1]] }, () => this.checkFields());
         break;
       case 'CUIL':
-        this.setState({ cuil: [value, this.state.cuil[1]] }, this.checkFields());
+        this.setState({ cuil: [value, this.state.cuil[1]] }, () => this.checkFields());
+        break;
+      case 'Nº de Documento':
+        this.setState({ numeroDocumento: [value, this.state.numeroDocumento[1]] }, () => this.checkFields());
+        break;
+      case 'Fecha de Afiliacion':
+        this.setState({ fechaEstado: [value, this.state.fechaEstado[1]] }, () => this.checkFields());
+        break
+      case 'Fecha de Nacimiento':
+        this.setState({ fechaNacimiento: [value, this.state.fechaNacimiento[1]] }, () => this.checkFields());
+        break;
+      case 'Subcontrato':
+        this.setState({ subcontrato: [value, this.state.subcontrato[1]] }, () => this.checkFields());
+        break;
+      case 'Legajo':
+        this.setState({ legajo: [value, this.state.legajo[1]] }, () => this.checkFields());
+        break;
+      case 'Domicilio': 
+        this.setState({ domicilio: [value, this.state.domicilio[1]] }, () => this.checkFields());
+        break;
+      case "Email":
+        this.setState({ email: [value, this.state.email[1]] }, () => this.checkFields());
+        break;
+      case 'Telefono':
+        this.setState({ telefono: [value, this.state.telefono[1]] }, () => this.checkFields());
         break;
       default:
         break;
@@ -96,8 +131,10 @@ class Buscar extends Component {
           {this.state.domicilio[1]}
         </div>
         <div className='columns'>
+        <div className='columns'>
           {this.state.tipoDocumento[1]}
           {this.state.numeroDocumento[1]}
+        </div>  
           {this.state.cuil[1]}
           {this.state.grupoSanguineo[1]}
           {this.state.email[1]}
@@ -110,12 +147,12 @@ class Buscar extends Component {
         </div>
         <div className='columns'>
           {this.state.idReparticion[1]}
+          {this.state.legajo[1]}
           {this.state.subcontrato[1]}
           <div className='columns'>
             {this.state.idServicio[1]}
             {this.state.unidadOrganizacional[1]}
           </div>
-          {this.state.legajo[1]}
         </div>
         <div className='columns'>
           {this.state.lugarPago[1]}

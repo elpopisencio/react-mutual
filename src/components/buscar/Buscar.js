@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Formulario from './Formulario';
+import './Buscar.css';
 
 class Buscar extends Component {
   constructor(props){

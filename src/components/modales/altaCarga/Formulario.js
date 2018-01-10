@@ -1,65 +1,105 @@
 import React, { Component } from 'react';
 import Campo from '../Campo';
+import Select from '../Select';
 
 class Buscar extends Component {
   constructor() {
     super();
     this.state = {
-      apellido: <Campo type="text" label={'Apellido'} placeholder="" is='is-one-fifth' />,
-      nombre: <Campo type="text" label={'Nombre'} placeholder="" is='is-one-fifth'/>,
-      sexo: <Campo type="text" label={'Sexo'} placeholder="" />,
-      cuil: <Campo type="text" label={'CUIL'} placeholder="" is='is-one-fifth'/>,
-      tipoDocumento: <Campo type="text" label={'Tipo de Doc.'} placeholder="" />,
-      numeroDocumento: <Campo type="text" label={'Nº de Documento'} placeholder="" is='is-one-fifth'/>,
-      grupoSanguineo: <Campo type="text" label={'Grupo Sanguineo'} placeholder="" />,
-      fechaEstado: <Campo type="date" label={'Fecha de cambio de estado'} placeholder="" />,
-      fechaTarjeta: <Campo type="date" label={'Fecha de Entrega de Tarjeta'} placeholder="" />,
-      fechaNacimiento: <Campo type="date" label={'Fecha de Nacimiento'} placeholder="" />,
-      idReparticion: <Campo type="text" label={'Reparticion'} placeholder="" />,
-      subcontrato: <Campo type="text" label={'Subcontrato'} placeholder="" />,
-      idUnidadServicio: <Campo type="text" label={'Unidad y Servicio'} placeholder="" />,
-      legajo: <Campo type="text" label={'Legajo'} placeholder="" />,
-      lugarPago: <Campo type="text" label={'Lugar de Pago'} placeholder="" />,
-      idLocalidad: <Campo type="text" label={'Localidad'} placeholder="" is='is-one-fifth'/>,
-      domicilio: <Campo type="text" label={'Domicilio'} placeholder="" is='is-one-quarter' />,
-      email: <Campo type="text" label={'Email'} placeholder="" is='is-one-fifth'/>,
-      telefono: <Campo type="text" label={'Telefono'} placeholder="" />,
-      idDelegacion: <Campo type="text" label={'Delegacion'} placeholder="" />,
-      numeroCarga: <Campo type="text" label={'Numero de Carga'} placeholder="" />
+      number: 0,
+      numeroDocumentoTitular: ['', <Campo type="text" label={'Nº de Documento Titular'} placeholder="" is='is-one-fifth' handleChange={this.handleChange.bind(this)} />],
+      apellido: ['', <Campo type="text" label={'Apellido'} placeholder="" handleChange={this.handleChange.bind(this)} />],
+      nombre: ['', <Campo type="text" label={'Nombre'} placeholder="" handleChange={this.handleChange.bind(this)} />],
+      numeroDocumento: ['', <Campo type="text" label={'Nº de Documento'} placeholder="" is='is-two-fifths' handleChange={this.handleChange.bind(this)} />],
+      fechaEstado: ['', <Campo type="date" label={'Fecha de Afiliacion'} placeholder="" handleChange={this.handleChange.bind(this)} />],
+      fechaTarjeta: ['', <Campo type="date" label={'Fecha de Entrega de Tarjeta'} placeholder="" handleChange={this.handleChange.bind(this)} />],
+      fechaNacimiento: ['', <Campo type="date" label={'Fecha de Nacimiento'} placeholder="" handleChange={this.handleChange.bind(this)} />],
+      legajo: ['', <Campo type="text" label={'Legajo'} placeholder="" handleChange={this.handleChange.bind(this)} />],
+      numeroCarga: ['', <Campo type="text" label={'Numero de Carga'} placeholder="" handleChange={this.handleChange.bind(this)} />],
+      sexo: ['', <Select label={'Sexo'} value={[{ 'id': 'M', 'nombre': 'Masculino' }, { 'id': 'F', 'nombre': 'Femenino' }]} handleChange={this.handleChange.bind(this)} />],
+      tipoDocumento: ['', <Select label={'Tipo Doc.'} id={'tiposDocumento'} handleChange={this.handleChange.bind(this)} />],
+      grupoSanguineo: ['', <Select label={'Gr. Sang.'} id={'gruposSanguineos'} handleChange={this.handleChange.bind(this)} />],
     }
+    this.checkFields = this.checkFields.bind(this);
+  }
+  checkFields = () => {
+    console.log(
+
+      this.state.apellido[0],
+      this.state.nombre[0],
+      this.state.numeroDocumento[0],
+      this.state.fechaEstado[0],
+      this.state.fechaNacimiento[0],
+      this.state.legajo[0],
+    );
+    if (
+      this.state.apellido[0] !== '' &&
+      this.state.nombre[0] !== '' &&
+      this.state.numeroDocumento[0] !== '' &&
+      this.state.fechaEstado[0] !== '' &&
+      this.state.fechaNacimiento[0] !== '' &&
+      this.state.legajo[0] !== '' 
+    
+    ){
+        console.log('entro');
+        this.props.checkFields(true);
+      } else{
+        this.props.checkFields(false);
+      }
   }
 
+  handleChange(value, label) {
+    console.log(value, label);
+    switch (label) {
+      case 'Apellido':
+        this.setState({ apellido: [value, this.state.apellido[1]] }, () => this.checkFields());
+        break;
+      case 'Nombre':
+        this.setState({ nombre: [value, this.state.nombre[1]] }, () => this.checkFields());
+        break;
+      case 'Nº de Documento':
+        this.setState({ numeroDocumento: [value, this.state.numeroDocumento[1]] }, () => this.checkFields());
+        break;
+      case 'Fecha de Afiliacion':
+        this.setState({ fechaEstado: [value, this.state.fechaEstado[1]] }, () => this.checkFields());
+        break
+      case 'Fecha de Nacimiento':
+        this.setState({ fechaNacimiento: [value, this.state.fechaNacimiento[1]] }, () => this.checkFields());
+        break;
+      case 'Legajo':
+        this.setState({ legajo: [value, this.state.legajo[1]] }, () => this.checkFields());
+        break;
+      default:
+        break;
+
+    }
+  }
   render() {
     return (
       <div >
-          <div className='columns'>
-        {this.state.apellido }
-      {this.state.nombre}
-      {this.state.sexo}
-      {this.state.idLocalidad}
-      {this.state.domicilio}
-      </div>
-          <div className='columns'>
-      {this.state.tipoDocumento}
-      {this.state.numeroDocumento}
-      {this.state.cuil}
-      {this.state.grupoSanguineo}
-      {this.state.email}
-      {this.state.telefono}
-      </div>
-          <div className='columns'>
-      {this.state.fechaEstado}
-      {this.state.fechaTarjeta}
-      {this.state.fechaNacimiento}
-      </div>
-          <div className='columns'>
-      {this.state.idReparticion}
-      {this.state.subcontrato}
-      {this.state.idUnidadServicio}
-      {this.state.legajo}
-      {this.state.lugarPago}
-      {this.state.idDelegacion}
-      </div>
+
+        <div className='columns'>
+          {this.state.numeroDocumentoTitular}
+        </div>
+        <div className='columns'>
+          {this.state.apellido[1]}
+          {this.state.nombre[1]}
+          <div className='column is-three-fifths'>
+        <div className='columns'>
+          {this.state.sexo[1]}
+          {this.state.tipoDocumento[1]}
+          {this.state.numeroDocumento[1]}
+          {this.state.grupoSanguineo[1]}
+        </div>  
+        </div>  
+        </div>
+        <div className='columns'>
+          {this.state.fechaEstado[1]}
+          {this.state.fechaTarjeta[1]}
+          {this.state.fechaNacimiento[1]}
+          {this.state.legajo[1]}
+          {this.state.numeroCarga[1]}
+        </div>
       </div>
     );
   }

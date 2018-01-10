@@ -13,7 +13,7 @@ class Select extends Component {
           this.setState({
             options: response,
             value: response[0].id
-          }, () => console.log(this.state.value));
+          }, () => this.handleReparticion());
         })
         .catch(function (error) {
           console.log('Request failed', error)
@@ -24,6 +24,20 @@ class Select extends Component {
       });
     }
   }
+
+  handleReparticion = () => {
+    if(this.props.id === 'reparticiones'){
+    console.log(this.state.options);
+      let opt = this.state.options.map((item) => {
+        let ret = {nombre: item.codigo_reparticion + ' - ' + item.nombre};
+        return ret;
+      });
+      this.setState({options: opt},
+    console.log(this.state.options)
+      )
+    }
+  }
+
   handleChange(event) {
     this.setState({ value: event.target.value}); 
     this.props.handleChange( event.target.value, this.props.label);
@@ -53,7 +67,7 @@ class Select extends Component {
       return (
         <div className={`column`}>
           <div className="field">
-            <label className="label">{this.props.label}</label>
+            <label className="label">{this.props.label}*</label>
             <div className="select is-info">
               <select onChange={this.handleChange.bind(this)}>
                 {options}

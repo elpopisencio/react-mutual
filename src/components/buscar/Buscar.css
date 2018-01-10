@@ -1,0 +1,19 @@
+.button.link{
+    margin-top: 0.5em
+}
+.button.is-small{
+    width: 20%;
+    margin: 5px;
+}
+.apellido{
+    width: 20%
+}
+.nombre{
+    width: 20%
+}
+.numero{
+    width: 10%
+}
+.estado{
+    width: 10%
+}

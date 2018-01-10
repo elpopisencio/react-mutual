@@ -65,7 +65,7 @@ class AltaTitular extends React.Component {
   }
 
   checkFields(bool){
-    this.setState({formulario: bool}, this.displayModal(this.state.boton));
+    this.setState({formulario: bool}, () => this.displayModal(this.state.boton));
   }
 
   handleCloseModal() {

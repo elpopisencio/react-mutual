@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import Formulario from './Formulario';
 import Footer from '../Footer';
+import './AltaCarga.css';
 
 class AltaCarga extends React.Component {
   constructor() {
     super();
     this.state = {
       showModal: false,
-      boton: ''
+      boton: '',
+      modal: <div />,
+      formulario: false,
     };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -16,18 +19,65 @@ class AltaCarga extends React.Component {
   }
 
   handleOpenModal() {
-    this.setState({ showModal: true });
+    this.displayModal('');
+  }
+
+  displayModal(boton) {
+    let a = '';
+    if (this.state.formulario) {
+      a = <a className={`button is-link ${boton}`} onClick={this.handleAlta.bind(this)}>
+        Dar Alta
+      </a>;
+    } else {
+         a = <a className={`button is-link ${boton}`} disabled onClick={this.handleAlta.bind(this)}>
+               Dar Alta
+             </a>;
+    }
+
+    this.setState({
+      modal:
+        <ReactModal
+          isOpen={true}
+          contentLabel="Minimal Modal Example"
+          ariaHideApp={false}
+        >
+          <Formulario checkFields={this.checkFields.bind(this)} />
+          <Footer>
+            <div className='level'>
+              <div className='level-left'>
+              </div>
+              <div className='level-right'>
+                <div className="field is-grouped">
+                  <p className="control">
+                    {a}
+                  </p>
+                  <p className="control">
+                    <a className="button" onClick={this.handleCloseModal}>
+                      Cancelar
+                  </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Footer>
+        </ReactModal>
+    });
+  }
+
+  checkFields(bool){
+    this.setState({formulario: bool}, () => this.displayModal(this.state.boton));
   }
 
   handleCloseModal() {
-    this.setState({ showModal: false });
+    this.setState({
+      modal: <div />
+    });
   }
 
   handleAlta() {
-    console.log("hola");
-    this.setState({
-      boton: 'is-loading'
-    });
+    if (this.state.formulario) {
+      this.setState({boton: 'is-loading'}, this.displayModal('is-loading'));
+    }
   }
 
   render() {
@@ -36,35 +86,9 @@ class AltaCarga extends React.Component {
         <a className="button" onClick={this.handleOpenModal}>
           <span>
             Alta Carga
-                    </span>
+          </span>
         </a>
-        <ReactModal
-          isOpen={this.state.showModal}
-          contentLabel="Minimal Modal Example"
-          ariaHideApp={false}
-        >
-          <Formulario />
-          <Footer>
-            <div className='level'>
-              <div className='level-left'>
-      </div>
-              <div className='level-right'>
-                <div className="field is-grouped">
-                  <p className="control">
-                    <a className={`button is-link ${this.state.boton}`} onClick={this.handleAlta.bind(this)}>
-                      Dar Alta
-    </a>
-                  </p>
-                  <p className="control">
-                    <a className="button" onClick={this.handleCloseModal}>
-                      Cancelar
-    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Footer>
-        </ReactModal>
+        {this.state.modal}
       </div>
     );
   }
