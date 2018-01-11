@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AltaTitular from './modales/altaTitular/AltaTitular';
 import AltaCarga from './modales/altaCarga/AltaCarga';
+import MostrarTitular from './modales/mostrarTitular/MostrarTitular';
 
 class Barra extends Component {
   render() {
@@ -22,6 +23,13 @@ class Barra extends Component {
               <div className="field is-grouped">
                 <div className="control">
                   <AltaCarga />
+                </div>
+              </div>
+            </div>
+            <div className="navbar-item">
+              <div className="field is-grouped">
+                <div className="control">
+                  <MostrarTitular />
                 </div>
               </div>
             </div>

@@ -1,8 +1,8 @@
 select {
-    min-width: 100%;
+    width: 100%;
 }
 .select{
-    min-width: 100%;
+    width: 100%;
 }
 .columns > .columns{
     margin-left: 0px;

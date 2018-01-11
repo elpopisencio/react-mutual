@@ -18,13 +18,13 @@ class Campo extends Component {
     if(this.props.label !== 'Fecha de Entrega de Tarjeta'){
       ast = '*';
     }
-    if (this.props.estado) {
+    if (this.props.readonly === "readonly") {
       return (
         <div className={`column ${this.props.is}`}>
           <div className="field">
             <label className="label">{this.props.label}</label>
             <div className="control">
-              <input className="input is-info" disabled></input>
+              <input className="input is-info" readonly></input>
             </div>
           </div>
         </div>

@@ -7,107 +7,32 @@ class Buscar extends Component {
     super();
     this.state = {
       number: 0,
-      apellido: ['', <Campo type="text" label={'Apellido'} placeholder="" is='is-one-fifth' handleChange={this.handleChange.bind(this)} />],
-      nombre: ['', <Campo type="text" label={'Nombre'} placeholder="" is='is-one-fifth' handleChange={this.handleChange.bind(this)} />],
-      cuil: ['', <Campo type="text" label={'CUIL'} placeholder="" is='is-one-fifth' handleChange={this.handleChange.bind(this)} />],
-      numeroDocumento: ['', <Campo type="text" label={'Nº de Documento'} placeholder="" is='is-two-thirds' handleChange={this.handleChange.bind(this)} />],
-      fechaEstado: ['', <Campo type="date" label={'Fecha de Afiliacion'} placeholder="" handleChange={this.handleChange.bind(this)} />],
-      fechaTarjeta: ['', <Campo type="date" label={'Fecha de Entrega de Tarjeta'} placeholder="" handleChange={this.handleChange.bind(this)} />],
-      fechaNacimiento: ['', <Campo type="date" label={'Fecha de Nacimiento'} placeholder="" handleChange={this.handleChange.bind(this)} />],
-      subcontrato: ['', <Campo type="text" label={'Subcontrato'} placeholder="" handleChange={this.handleChange.bind(this)} />],
-      legajo: ['', <Campo type="text" label={'Legajo'} placeholder="" handleChange={this.handleChange.bind(this)} />],
-      domicilio: ['', <Campo type="text" label={'Domicilio'} placeholder="" handleChange={this.handleChange.bind(this)} />],
-      email: ['', <Campo type="email" label={'Email'} placeholder="" is='is-one-fourth' handleChange={this.handleChange.bind(this)} />],
-      telefono: ['', <Campo type="text" label={'Telefono'} placeholder="" handleChange={this.handleChange.bind(this)} />],
-      numeroCarga: ['', <Campo type="text" label={'Numero de Carga'} placeholder="" handleChange={this.handleChange.bind(this)} />],
-      sexo: ['', <Select label={'Sexo'} value={[{ 'id': 'M', 'nombre': 'Masculino' }, { 'id': 'F', 'nombre': 'Femenino' }]} handleChange={this.handleChange.bind(this)} />],
-      tipoDocumento: ['', <Select label={'Tipo Doc.'} id={'tiposDocumento'} handleChange={this.handleChange.bind(this)} />],
-      grupoSanguineo: ['', <Select label={'Grupo Sanguineo'} id={'gruposSanguineos'} handleChange={this.handleChange.bind(this)} />],
-      idReparticion: ['', <Select label={'Reparticion'} id={'reparticiones'} handleChange={this.handleChange.bind(this)} />],
-      idDelegacion: ['', <Select label={'Delegacion'} id={'delegaciones'} handleChange={this.handleChange.bind(this)} />],
-      idServicio: ['', <Select label={'Servicio'} id={'servicios'} handleChange={this.handleChange.bind(this)} />],
-      idLocalidad: ['', <Select label={'Localidad'} id={'localidades'} handleChange={this.handleChange.bind(this)} />],
-      lugarPago: ['', <Select label={'Lugar de Pago'} id={'lugaresDePago'} handleChange={this.handleChange.bind(this)} />],
-      unidadOrganizacional: ['', <Select label={'Uni. Orga.'} value={[{ 'id': '11', 'nombre': '11' }, { 'id': '12', 'nombre': '12' }, { 'id': '25', 'nombre': '25' }, { 'id': '26', 'nombre': '26' }]} handleChange={this.handleChange.bind(this)} />],
+      apellido:             ['', <Campo  label={'Apellido'}                    handleChange={this.handleChange.bind(this)}  type="text"    is='is-one-fifth'/>],
+      nombre:               ['', <Campo  label={'Nombre'}                      handleChange={this.handleChange.bind(this)}  type="text"    is='is-one-fifth'/>],
+      cuil:                 ['', <Campo  label={'CUIL'}                        handleChange={this.handleChange.bind(this)}  type="text"    is='is-one-fifth'/>],
+      numeroDocumento:      ['', <Campo  label={'Nº de Documento'}             handleChange={this.handleChange.bind(this)}  type="text"    is='is-two-thirds'/>],
+      email:                ['', <Campo  label={'Email'}                       handleChange={this.handleChange.bind(this)}  type="email"   is='is-one-fourth'/>],
+      fechaEstado:          ['', <Campo  label={'Fecha de Afiliacion'}         handleChange={this.handleChange.bind(this)}  type="date"    />],
+      fechaTarjeta:         ['', <Campo  label={'Fecha de Entrega de Tarjeta'} handleChange={this.handleChange.bind(this)}  type="date"    />],
+      fechaNacimiento:      ['', <Campo  label={'Fecha de Nacimiento'}         handleChange={this.handleChange.bind(this)}  type="date"    />],
+      subcontrato:          ['', <Campo  label={'Subcontrato'}                 handleChange={this.handleChange.bind(this)}  type="text"    />],
+      legajo:               ['', <Campo  label={'Legajo'}                      handleChange={this.handleChange.bind(this)}  type="text"    />],
+      domicilio:            ['', <Campo  label={'Domicilio'}                   handleChange={this.handleChange.bind(this)}  type="text"    />],
+      telefono:             ['', <Campo  label={'Telefono'}                    handleChange={this.handleChange.bind(this)}  type="text"    />],
+      numeroCarga:          ['', <Campo  label={'Numero de Carga'}             handleChange={this.handleChange.bind(this)}  type="text"    />],
+      sexo:                 ['', <Select label={'Sexo'}                        handleChange={this.handleChange.bind(this)} value={[{ 'id': 'M', 'nombre': 'Masculino' }, { 'id': 'F', 'nombre': 'Femenino' }]} />],
+      tipoDocumento:        ['', <Select label={'Tipo Doc.'}                   handleChange={this.handleChange.bind(this)} id={'tiposDocumento'}/>],
+      grupoSanguineo:       ['', <Select label={'Grupo Sanguineo'}             handleChange={this.handleChange.bind(this)} id={'gruposSanguineos'}/>],
+      idReparticion:        ['', <Select label={'Reparticion'}                 handleChange={this.handleChange.bind(this)} id={'reparticiones'}/>],
+      idDelegacion:         ['', <Select label={'Delegacion'}                  handleChange={this.handleChange.bind(this)} id={'delegaciones'}/>],
+      idServicio:           ['', <Select label={'Servicio'}                    handleChange={this.handleChange.bind(this)} id={'servicios'}/>],
+      idLocalidad:          ['', <Select label={'Localidad'}                   handleChange={this.handleChange.bind(this)} id={'localidades'}/>],
+      lugarPago:            ['', <Select label={'Lugar de Pago'}               handleChange={this.handleChange.bind(this)} id={'lugaresDePago'}/>],
+      unidadOrganizacional: ['', <Select label={'Uni. Orga.'}                  handleChange={this.handleChange.bind(this)} value={[{ 'id': '11', 'nombre': '11' }, { 'id': '12', 'nombre': '12' }, { 'id': '25', 'nombre': '25' }, { 'id': '26', 'nombre': '26' }]} />],
     }
-    this.checkFields = this.checkFields.bind(this);
-  }
-  checkFields = () => {
-    console.log(
-
-      this.state.apellido[0],
-      this.state.nombre[0],
-      this.state.cuil[0],
-      this.state.numeroDocumento[0],
-      this.state.fechaEstado[0],
-      this.state.fechaNacimiento[0],
-      this.state.subcontrato[0],
-      this.state.legajo[0],
-      this.state.domicilio[0],
-      this.state.email[0],
-      this.state.telefono
-    );
-    if (
-      this.state.apellido[0] !== '' &&
-      this.state.nombre[0] !== '' &&
-      this.state.cuil[0] !== '' &&
-      this.state.numeroDocumento[0] !== '' &&
-      this.state.fechaEstado[0] !== '' &&
-      this.state.fechaNacimiento[0] !== '' &&
-      this.state.subcontrato[0] !== '' &&
-      this.state.legajo[0] !== '' &&
-      this.state.domicilio[0] !== '' &&
-      this.state.email[0] !== '' &&
-      this.state.telefono[0] !== ''
-    
-    ){
-        console.log('entro');
-        this.props.checkFields(true);
-      } else{
-        this.props.checkFields(false);
-      }
   }
 
   handleChange(value, label) {
-    console.log(value, label);
-    switch (label) {
-      case 'Apellido':
-        this.setState({ apellido: [value, this.state.apellido[1]] }, () => this.checkFields());
-        break;
-      case 'Nombre':
-        this.setState({ nombre: [value, this.state.nombre[1]] }, () => this.checkFields());
-        break;
-      case 'CUIL':
-        this.setState({ cuil: [value, this.state.cuil[1]] }, () => this.checkFields());
-        break;
-      case 'Nº de Documento':
-        this.setState({ numeroDocumento: [value, this.state.numeroDocumento[1]] }, () => this.checkFields());
-        break;
-      case 'Fecha de Afiliacion':
-        this.setState({ fechaEstado: [value, this.state.fechaEstado[1]] }, () => this.checkFields());
-        break
-      case 'Fecha de Nacimiento':
-        this.setState({ fechaNacimiento: [value, this.state.fechaNacimiento[1]] }, () => this.checkFields());
-        break;
-      case 'Subcontrato':
-        this.setState({ subcontrato: [value, this.state.subcontrato[1]] }, () => this.checkFields());
-        break;
-      case 'Legajo':
-        this.setState({ legajo: [value, this.state.legajo[1]] }, () => this.checkFields());
-        break;
-      case 'Domicilio': 
-        this.setState({ domicilio: [value, this.state.domicilio[1]] }, () => this.checkFields());
-        break;
-      case "Email":
-        this.setState({ email: [value, this.state.email[1]] }, () => this.checkFields());
-        break;
-      case 'Telefono':
-        this.setState({ telefono: [value, this.state.telefono[1]] }, () => this.checkFields());
-        break;
-      default:
-        break;
-
-    }
     if (label === 'Servicio') {
       if (value !== '1') {
         this.setState({
@@ -119,6 +44,7 @@ class Buscar extends Component {
         });
       }
     }
+    this.props.handleChange(value,label);
   }
   render() {
     return (
